@@ -1,0 +1,66 @@
+.explanation{
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    width: 100%;
+}
+.title{
+    margin: 0;
+    width: 100%;
+}
+.title ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title ul li{
+    background: rgb(148,166,141);
+    border-right: 1px solid rgb(169,187,162);
+    text-align: center;
+    color: #ffffff;
+    line-height: 30px;
+}
+.title ul li:nth-last-child(1){
+    border: 0;
+}
+
+.info ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info ul li{
+    background-color: #fff;
+    border-right: 1px solid rgb(223,223,223);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info ul li:nth-last-child(1){
+    border: 0;
+}
+.info ul *{
+    color: rgb(101,101,101);
+}
+.info ul li *{
+    width: 98%;
+    height: 98%;
+    border: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info ul li textarea{
+    padding: 10px;
+}
+.info ul li select{
+    text-align: center;
+    text-align-last: center;
+}
+.info ul li input{
+    text-align: center;
+}

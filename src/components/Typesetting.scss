@@ -1,0 +1,21 @@
+.typesetting{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.typesetting *{
+    width: 100px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+}
+.typesetting .item{
+    background-color: rgb(148,166,141);
+    color: #ffffff;
+}
