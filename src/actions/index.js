@@ -4,7 +4,6 @@ import * as types from '../constants/ActionTypes';
 export const addWorksection = () => {
     return {
         type: types.ADD_WORKSECTION
-        //還需要回傳什麼??
     };
 };
 
@@ -16,47 +15,47 @@ export const delWorksection = (id) => {
     };
 };
 
-/* section: 加入一列 */
-export const editList = (id, message) => {
-    return {
-        type: types.EDIT_LIST,
-        id,
-        message
-    };
-};
+// /* section: 加入一列 */
+// export const editList = (id, message) => {
+//     return {
+//         type: types.EDIT_LIST,
+//         id,
+//         message
+//     };
+// };
 
-/* section: 刪除一列 */
-export const editList = (id, message) => {
-    return {
-        type: types.EDIT_LIST,
-        id,
-        message
-    };
-};
+// /* section: 刪除一列 */
+// export const editList = (id, message) => {
+//     return {
+//         type: types.EDIT_LIST,
+//         id,
+//         message
+//     };
+// };
 
-/* section: 儲存/預覽 */
-export const editList = (id, message) => {
-    return {
-        type: types.EDIT_LIST,
-        id,
-        message
-    };
-};
+// /* section: 儲存/預覽 */
+// export const editList = (id, message) => {
+//     return {
+//         type: types.EDIT_LIST,
+//         id,
+//         message
+//     };
+// };
 
-/* section: 新增參考圖片 */
-export const editList = (id, message) => {
-    return {
-        type: types.EDIT_LIST,
-        id,
-        message
-    };
-};
+// /* section: 新增參考圖片 */
+// export const editList = (id, message) => {
+//     return {
+//         type: types.EDIT_LIST,
+//         id,
+//         message
+//     };
+// };
 
-/* section: 刪除參考圖片 */
-export const editList = (id, message) => {
-    return {
-        type: types.EDIT_LIST,
-        id,
-        message
-    };
-};
+// /* section: 刪除參考圖片 */
+// export const editList = (id, message) => {
+//     return {
+//         type: types.EDIT_LIST,
+//         id,
+//         message
+//     };
+// };

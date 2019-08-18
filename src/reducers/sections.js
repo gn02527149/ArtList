@@ -22,33 +22,13 @@ let initialSection = {    //大
             ""
         ],
         infoItem:[
-            initialinfoItem,
-            initialinfoItem,
-            initialinfoItem,
             initialinfoItem
         ],
         sectionId:listId++
     }]
 };
-let initialState = [  //全部 
-    initialSection,
-    initialSection
-];
-
-const section = (state, action) => {
-    switch (action.type) {
-        case types.ADD_LIST:
-            return {
-                sectionInfoId:listKId++,
-                serialNumber:serialNum++,
-                fileName   : "",
-                explanation: "",
-                name   : "",
-                type: ""
-            };
-        default:
-            return state;
-    };
+let initialState = { //全部
+    data: [initialSection]
 };
 
 const sections = (state = initialState, action) => {
@@ -69,6 +49,25 @@ const sections = (state = initialState, action) => {
         //         ...state,
         //         message: action.message
         //     };
+        case types.ADD_WORKSECTION:
+            let newdata = {
+                ...initialSection,
+                sectionInfo: [
+                    ...initialSection.sectionInfo[0],
+                    {
+                       ...initialSection.sectionInfo[0],
+                        sectionId:listId++
+                    }
+                ]
+            }
+            console.log(newdata)
+            return {
+                ...state,
+                // serialNumber:serialNum++,
+                // sectionInfoId:listKId++,
+                // sectionId:listId++,
+                data: state.data.concat(newdata)
+            }
         default:
             return state;
     };

@@ -28,7 +28,6 @@ class ItemList extends Component {
                     </ul>
                 </div>
                 {sectionInfo.map((info,index) =>this.genItemListInfo(info,index))}
-                <div className="appendItemList">增加畫面</div>
             </div>
         )
     }
