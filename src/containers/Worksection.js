@@ -46,6 +46,7 @@ class Worksection extends Component {
   }
   render(){
     const { sections } = this.props;
+    console.log(sections);
     return (
       <div>
           {sections.data.map((info,index) =>this.genTitleName(info,index))}

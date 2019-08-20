@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import './ItemInfos.scss'
 
 class ItemInfos extends Component {
@@ -20,11 +19,4 @@ class ItemInfos extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    sections: state.sections
-  })
-  // dispatch => bindActionCreators({
-  //     delList
-  // }, dispatch)
-)(ItemInfos);
+export default ItemInfos;

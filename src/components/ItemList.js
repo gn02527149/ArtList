@@ -6,13 +6,6 @@ class ItemList extends Component {
     constructor(props){
         super(props)
     }
-    genItemListInfo(info,index){
-        return (
-            <div className="ItemListInfo" key={`ItemListInfo_${info.sectionId}${index}`} id={`ItemListInfo_${info.sectionId}${index}`}>
-                <ItemListInfo index={index} {...info} />
-            </div>
-        )
-    }
     render(){
         const { sectionInfo } = this.props;
         return (
@@ -27,7 +20,9 @@ class ItemList extends Component {
                         <li className="fx3">參考畫面</li>
                     </ul>
                 </div>
-                {sectionInfo.map((info,index) =>this.genItemListInfo(info,index))}
+                <div className="ItemListInfo">
+                    <ItemListInfo {...sectionInfo} />
+                </div>
             </div>
         )
     }

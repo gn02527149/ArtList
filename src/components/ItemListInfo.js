@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import ItemInfos from './ItemInfos'
 import './ItemListInfo.scss'
 
@@ -37,23 +36,14 @@ class ItemListInfo extends Component {
                     {infoItem.map((info,index) =>this.genItemInfos(info,index))}
                 </div>
                 <div className="viewBox fx1">
-                    <input id={`viewBoxInput_${infoItem[index].sectionInfoId}${index}`} type="file" onChange={this.handleFileChange}></input>
-                    <label htmlFor={`viewBoxInput_${infoItem[index].sectionInfoId}${index}`}>
-                        <img id={`preview_img_${infoItem[index].sectionInfoId}${index}`} src=""/>
+                    <input id={`viewBoxInput_${index}`} type="file" onChange={this.handleFileChange}></input>
+                    <label htmlFor={`viewBoxInput_${index}`}>
+                        <img id={`preview_img_${index}`} src=""/>
                     </label>
                 </div>
-                
             </div>
         )
     }
 }
   
-export default connect(
-    state => ({
-      lists : state.lists,
-      sections: state.sections
-    }),
-    // dispatch => bindActionCreators({
-    //     delList
-    // }, dispatch)
-  )(ItemListInfo);
+export default ItemListInfo;
