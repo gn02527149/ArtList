@@ -30,7 +30,7 @@ module.exports = {
                 loaders: ['style', 'css', 'sass']
             },
             {
-                test: /\.(png|jpg|jpeg|gif|ico)$/,
+                test: /\.(png|jpg|jpeg|gif|ico|svg)$/,
                 loader: 'url?limit=8192'
             }
         ]
