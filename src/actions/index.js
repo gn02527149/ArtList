@@ -7,29 +7,27 @@ export const addWorksection = () => {
     };
 };
 
-/* section: 刪除畫面 */
-export const delWorksection = (id) => {
+// /* section: 刪除畫面 */
+// export const delWorksection = (id) => {
+//     return {
+//         type: types.DEL_WORKSECTION,
+//         id
+//     };
+// };
+
+/* section: 加入一列 */
+export const addeditList = (id) => {
     return {
-        type: types.DEL_WORKSECTION,
+        type: types.ADD_EDITLIST,
         id
     };
 };
 
-// /* section: 加入一列 */
-// export const editList = (id, message) => {
-//     return {
-//         type: types.EDIT_LIST,
-//         id,
-//         message
-//     };
-// };
-
 // /* section: 刪除一列 */
-// export const editList = (id, message) => {
+// export const deleditList = (id) => {
 //     return {
-//         type: types.EDIT_LIST,
-//         id,
-//         message
+//         type: types.DEL_EDITLIST,
+//         id
 //     };
 // };
 

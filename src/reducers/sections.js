@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes';
 
-let listId = 101;
+let listId = 0;
 let listKId = 201;
 let serialNum = 1;
 
@@ -23,9 +23,9 @@ let initialSection = {    //大
         ],
         infoItem:[
             initialinfoItem
-        ],
-        sectionId:listId++
-    }]
+        ]
+    }],
+    sectionId:listId++
 };
 let initialState = { //全部
     data: [initialSection]
@@ -33,40 +33,44 @@ let initialState = { //全部
 
 const sections = (state = initialState, action) => {
     switch (action.type) {
-        // case types.TOGGLE_MODAL:
+        // case types.ADD_WORKSECTION:
+        //     let newdata = {
+        //         ...initialSection,
+        //         sectionInfo: [
+        //             ...initialSection.sectionInfo[0],
+        //             {
+        //                ...initialSection.sectionInfo[0],
+        //                 sectionId:listId++
+        //             }
+        //         ]
+        //     }
         //     return {
         //         ...state,
-        //         visible: action.visible
-        //     };
-        // case types.UPDATE_USER:
-        //     return {
-        //         ...state,
-        //         user   : action.user,
-        //         user_id: action.user.toUpperCase()
-        //     };
-        // case types.UPDATE_MESSAGE:
-        //     return {
-        //         ...state,
-        //         message: action.message
-        //     };
+        //         data: state.data.concat(newdata)
+        //     }
         case types.ADD_WORKSECTION:
             let newdata = {
                 ...initialSection,
-                sectionInfo: [
-                    ...initialSection.sectionInfo[0],
-                    {
-                       ...initialSection.sectionInfo[0],
-                        sectionId:listId++
-                    }
-                ]
+                sectionId:listId++
             }
-            console.log(newdata)
             return {
                 ...state,
-                // serialNumber:serialNum++,
-                // sectionInfoId:listKId++,
-                // sectionId:listId++,
                 data: state.data.concat(newdata)
+            }
+        case types.ADD_EDITLIST:
+            let addData = state.data.filter((i)=>{
+                return action.id == i.sectionId;
+            })
+            let newdata2 = {
+                ...addData,
+                sectionInfo:[
+                    ...initialSection.sectionInfo[0]
+                ]
+            }
+            console.log(newdata2)
+            return {
+                ...state,
+                data: state.data.concat(newdata2)
             }
         default:
             return state;
