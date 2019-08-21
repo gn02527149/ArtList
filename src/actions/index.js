@@ -7,13 +7,13 @@ export const addWorksection = () => {
     };
 };
 
-// /* section: 刪除畫面 */
-// export const delWorksection = (id) => {
-//     return {
-//         type: types.DEL_WORKSECTION,
-//         id
-//     };
-// };
+/* section: 刪除畫面 */
+export const delWorksection = (id) => {
+    return {
+        type: types.DEL_WORKSECTION,
+        id
+    };
+};
 
 /* section: 加入一列 */
 export const addeditList = (id) => {
@@ -23,13 +23,13 @@ export const addeditList = (id) => {
     };
 };
 
-// /* section: 刪除一列 */
-// export const deleditList = (id) => {
-//     return {
-//         type: types.DEL_EDITLIST,
-//         id
-//     };
-// };
+/* section: 刪除一列 */
+export const deleditList = (id) => {
+    return {
+        type: types.DEL_EDITLIST,
+        id
+    };
+};
 
 // /* section: 儲存/預覽 */
 // export const editList = (id, message) => {

@@ -42,49 +42,34 @@ const sections = (state = initialState, action) => {
                 ...state,
                 data: state.data.concat(newdata)
             }
+        case types.DEL_WORKSECTION:
+            return {
+                ...state,
+                data: state.data.filter((list) => parseInt(action.id) !== parseInt(list.sectionId))
+            }
         case types.ADD_EDITLIST:
             let _newItem = {
                 ...initialinfoItem,
                 sectionInfoId: listKId++,
             }
+            let _newDate = {
+                ...state.data,
+                [action.id]: {
+                    ...state.data[action.id],
+                    sectionInfo: {
+                        ...state.data[action.id].sectionInfo,
+                        infoItem: [
+                            ...state.data[action.id].sectionInfo.infoItem.concat(_newItem)
+                        ]
+                    }
+                }
+            }
+            let result = Object.keys(_newDate).map(function(key) {
+                return _newDate[key];
+              });
             return {
                 ...state,
-                data: [
-                    ...state.data.slice(0, action.id),
-                    {
-                        ...state.data[action.id],
-                        sectionInfo: {
-                            ...state.data[action.id].sectionInfo,
-                            infoItem: [
-                                ...state.data[action.id].sectionInfo.infoItem.concat(_newItem)
-                            ]
-                        }
-                    },
-                    ...state.data.slice(action.id)
-                ],
-                // [action.id]:{
-                //     ...state.data[action.id],
-                //     sectionInfo: {
-                //         ...state.data[action.id].sectionInfo,
-                //         infoItem: [
-                //             ...state.data[action.id].sectionInfo.infoItem.concat(_newItem)
-                //         ]
-                //     }
-                // }
-
-                // ...state,
-                // data: {
-                //     ...state.data,
-                //     [action.id]: {
-                //         ...state.data[action.id],
-                //         sectionInfo: {
-                //             ...state.data[action.id].sectionInfo,
-                //             infoItem: [
-                //                 ...state.data[action.id].sectionInfo.infoItem.concat(_newItem)
-                //             ]
-                //         }
-                //     }
-                // }
+                data: result
             }
         default:
             return state;
