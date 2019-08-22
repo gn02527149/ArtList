@@ -7,7 +7,7 @@ class ItemList extends Component {
         super(props)
     }
     render(){
-        const { sectionInfo } = this.props;
+        const { sectionInfo,sectionId } = this.props;
         return (
             <div className="ItemList">
                 <div className="title">
@@ -21,7 +21,7 @@ class ItemList extends Component {
                     </ul>
                 </div>
                 <div className="ItemListInfo">
-                    <ItemListInfo {...sectionInfo} />
+                    <ItemListInfo {...sectionInfo} sectionId={sectionId}/>
                 </div>
             </div>
         )

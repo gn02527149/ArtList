@@ -34,6 +34,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 .itemInfos ul:nth-child(even) *{
     background-color: rgb(242,242,242);
@@ -41,4 +42,41 @@
 .appendItem{
     cursor: pointer;
     border: 1px solid #dbdbd8;
+}
+
+.itemInfos:hover :not(.toolicon) *{
+    background-color: rgb(196,237,177);
+}
+
+.itemInfos .toolicon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 4px solid #8cbf73;
+    background: linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    background: -moz-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    background: -webkit-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    background: -o-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: none;
+}
+.itemInfos .toolicon img{
+    filter: invert(90%) sepia(120%) saturate(338%) hue-rotate(70deg) brightness(60%) contrast(89%);
+}
+.itemInfos .toolicon:hover{
+    border: 4px solid #9bdd7c;
+    background: linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+    background: -moz-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+    background: -webkit-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+    background: -o-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+}
+.itemInfos:hover .toolicon{
+    display: flex;
 }

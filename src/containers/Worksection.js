@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addeditList,delWorksection } from '../actions'
+import { addeditList,delWorksection,changeTools } from '../actions'
 import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
 import ItemList from '../components/ItemList'
@@ -24,15 +24,22 @@ class Worksection extends Component {
     let id = e.target.id.split("delsection_")[1]
     this.props.delWorksection(id)
   }
+  _changeTools=(e)=>{
+    e.preventDefault();
+    let id = e.currentTarget.id.split("_")[2]
+    let el = e.currentTarget.id.split("_")[1]
+    this.props.changeTools(id,el)
+    console.log(id,el);
+  }
   genTitleName(info,index){
     return (
       <div key={`Worksection_${info.sectionId}`} id={`Worksection_${info.sectionId}`}>
         <hr />
         <div className="Toolbar">
           <div className="tools">
-            <span className="edit select"><img src={editSrc} /></span>
-            <span className="sort"><img src={sortSrc} /></span>
-            <span className="del"><img src={delSrc} /></span>
+            <span id={`tool_edit_${index}`} onClick={this._changeTools} className={info.editclassName}><img src={editSrc} /></span>
+            <span id={`tool_sort_${index}`} onClick={this._changeTools} className={info.sortclassName}><img src={sortSrc} /></span>
+            <span id={`tool_del_${index}`} onClick={this._changeTools} className={info.delclassName}><img src={delSrc} /></span>
           </div>
           <div  className="appendrow" id={`appendrow_${index}`} onClick={this._onAddList}>新增一列</div>
           <div  className="sortpage">排序畫面</div>
@@ -43,7 +50,7 @@ class Worksection extends Component {
             <TitleName {...info} />
             <Typesetting {...info} />
           </div>
-          <ItemList {...info} />
+          <ItemList {...info}/>
         </div>
       </div>
     )
@@ -65,6 +72,7 @@ export default connect(
   }),
   dispatch => bindActionCreators({
     addeditList,
-    delWorksection
+    delWorksection,
+    changeTools
   }, dispatch)
 )(Worksection);

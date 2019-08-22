@@ -31,6 +31,15 @@ export const deleditList = (id) => {
     };
 };
 
+/* section: 功能更換 */
+export const changeTools = (id,el) => {
+    return {
+        type: types.CHANGE_TOOLS,
+        id,
+        el
+    };
+};
+
 // /* section: 儲存/預覽 */
 // export const editList = (id, message) => {
 //     return {

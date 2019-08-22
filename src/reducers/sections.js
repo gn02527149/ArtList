@@ -14,6 +14,9 @@ let initialinfoItem = {    //小
 };
 
 let initialSection = {    //大
+    editclassName: "edit select",
+    sortclassName: "sort",
+    delclassName: "del",
     sectionName: "開始畫面",
     arrange: "美術決定",
     sectionInfo:
@@ -52,7 +55,7 @@ const sections = (state = initialState, action) => {
                 ...initialinfoItem,
                 sectionInfoId: listKId++,
             }
-            let _newDate = {
+            let _addListDate = {
                 ...state.data,
                 [action.id]: {
                     ...state.data[action.id],
@@ -64,12 +67,30 @@ const sections = (state = initialState, action) => {
                     }
                 }
             }
-            let result = Object.keys(_newDate).map(function(key) {
-                return _newDate[key];
+            let result = Object.keys(_addListDate).map(function(key) {
+                return _addListDate[key];
               });
             return {
                 ...state,
                 data: result
+            }
+        case types.CHANGE_TOOLS:
+            let _changeDate = {
+                ...state.data,
+                [action.id]: {
+                    ...state.data[action.id],
+                    editclassName: action.el == "edit"? "edit select": "edit",
+                    sortclassName: action.el == "sort"? "sort select": "sort",
+                    delclassName: action.el == "del"? "del select": "del"
+                }
+            }
+            let result2 = Object.keys(_changeDate).map(function(key) {
+                return _changeDate[key];
+              });
+            return {
+                ...state,
+                data: result2
+
             }
         default:
             return state;

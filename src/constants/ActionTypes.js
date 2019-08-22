@@ -7,3 +7,4 @@ export const ADD_WORKSECTION  = 'ADD_WORKSECTION';
 export const DEL_WORKSECTION  = 'DEL_WORKSECTION';
 export const ADD_EDITLIST     = 'ADD_EDITLIST';
 export const DEL_EDITLIST     = 'DEL_EDITLIST';
+export const CHANGE_TOOLS     = 'CHANGE_TOOLS';

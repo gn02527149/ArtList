@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ItemInfos from './ItemInfos'
+import sortSrc from '../assets/images/switch_sort_2.svg'
+import delSrc from '../assets/images/switch_deleteRow_2.svg'
+
 import './ItemListInfo.scss'
+
 
 
 class ItemListInfo extends Component {
@@ -9,7 +13,8 @@ class ItemListInfo extends Component {
     }
     handleFileChange(e) {
         let str = e.target.id
-        let num = str.substr(str.length-4)
+        let num = str.substr(str.length-1)
+        
         if (e.target.files.length > 0) {
             let curFile = e.target.files[0];
             let reader = new FileReader();
@@ -21,24 +26,27 @@ class ItemListInfo extends Component {
         }   
     }
     genItemInfos(info,index){
+        const { sectionId } = this.props
         return (
-            <div className="itemInfos" key={`itemInfos_${info.sectionInfoId}${index}`} id={`itemInfos_${info.sectionInfoId}${index}`}>
+            <div className="itemInfos" key={`itemInfos_${sectionId}${index}`} id={`itemInfos_${sectionId}${index}`}>
                 <ItemInfos index={index} {...info}/>
+                <div className="toolicon sorticon"><img src={sortSrc} /></div>
+                {/* <div className="toolicon delicon"><img src={delSrc} /></div> */}
             </div>
             
         )
     }
     render(){
-        const { infoItem , index } = this.props
+        const { sectionId,infoItem } = this.props
         return (
             <div>
                 <div className="itemInfoBox fx7">
                     {infoItem.map((info,index) =>this.genItemInfos(info,index))}
                 </div>
                 <div className="viewBox fx1">
-                    <input id={`viewBoxInput_${index}`} type="file" onChange={this.handleFileChange}></input>
-                    <label htmlFor={`viewBoxInput_${index}`}>
-                        <img id={`preview_img_${index}`} src=""/>
+                    <input id={`viewBoxInput_${sectionId}`} type="file" onChange={this.handleFileChange}></input>
+                    <label htmlFor={`viewBoxInput_${sectionId}`}>
+                        <img id={`preview_img_${sectionId}`} src=""/>
                     </label>
                 </div>
             </div>
