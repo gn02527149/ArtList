@@ -6,14 +6,14 @@ class ItemInfos extends Component {
     super();
   }
   render(){
-    const { type, name, serialNumber,explanation, fileName } = this.props
+    const { type, name, serialNumber,explanation, fileName,disabled} = this.props
     return (
         <ul className="itemInfo fx1">
-            <li className="fx1"><input type="text" defaultValue={type}></input></li>
-            <li className="fx1"><textarea type="text" defaultValue={name}></textarea></li>
-            <li className="fx3"><textarea type="text" defaultValue={explanation}></textarea></li>
-            <li className="fx1"><input className="itemInfoFile" type="file" defaultValue={fileName}></input></li>
-            <li className="fx1"><input type="text" defaultValue={serialNumber}></input></li>
+            <li className="fx1"><input type="text" defaultValue={type} disabled={disabled}></input></li>
+            <li className="fx1"><textarea type="text" defaultValue={name} disabled={disabled}></textarea></li>
+            <li className="fx3"><textarea type="text" defaultValue={explanation} disabled={disabled}></textarea></li>
+            <li className="fx1"><input className="itemInfoFile" type="file" defaultValue={fileName} disabled={disabled}></input></li>
+            <li className="fx1"><input type="text" defaultValue={serialNumber} disabled={disabled}></input></li>
         </ul>
     )
   }

@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 
 let listId = 0;
-let listKId = 201;
+let listKId = 1;
 let serialNum = 1;
 
 let initialinfoItem = {    //小
@@ -17,6 +17,8 @@ let initialSection = {    //大
     editclassName: "edit select",
     sortclassName: "sort",
     delclassName: "del",
+    toolicon:"toolicon",
+    disabled:"",
     sectionName: "開始畫面",
     arrange: "美術決定",
     sectionInfo:
@@ -39,7 +41,8 @@ const sections = (state = initialState, action) => {
         case types.ADD_WORKSECTION:
             let newdata = {
                 ...initialSection,
-                sectionId:listId++
+                sectionId:listId++,
+                serialNumber:serialNum++
             }
             return {
                 ...state,
@@ -67,21 +70,46 @@ const sections = (state = initialState, action) => {
                     }
                 }
             }
-            let result = Object.keys(_addListDate).map(function(key) {
+            let addListresult = Object.keys(_addListDate).map(function(key) {
                 return _addListDate[key];
-              });
+            });
             return {
                 ...state,
-                data: result
+                data: addListresult
             }
+        case types.DEL_EDITLIST:
+                let parentsID = action.id.split('.')[0]
+                let listID = action.id.split('.')[1]
+                let _newListDate = {
+                    ...state.data,
+                    [parentsID]: {
+                        ...state.data[parentsID],
+                        sectionInfo: {
+                            ...state.data[parentsID].sectionInfo,
+                            infoItem: [
+                                ...state.data[parentsID].sectionInfo.infoItem.filter((el) => parseInt(listID) !== parseInt(el.sectionInfoId))
+                            ]
+                        }
+                    }
+                }
+                let delListresult = Object.keys(_newListDate).map(function(key) {
+                    return _newListDate[key];
+                });
+                return {
+                    ...state,
+                    data: delListresult
+                }
         case types.CHANGE_TOOLS:
+            let icontype = action.el+'icon toolicon'
             let _changeDate = {
                 ...state.data,
                 [action.id]: {
                     ...state.data[action.id],
                     editclassName: action.el == "edit"? "edit select": "edit",
                     sortclassName: action.el == "sort"? "sort select": "sort",
-                    delclassName: action.el == "del"? "del select": "del"
+                    delclassName: action.el == "del"? "del select": "del",
+                    toolicon: icontype,
+                    disabled: action.el == "edit"? "": "disabled"
                 }
             }
             let result2 = Object.keys(_changeDate).map(function(key) {

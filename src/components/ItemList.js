@@ -7,7 +7,7 @@ class ItemList extends Component {
         super(props)
     }
     render(){
-        const { sectionInfo,sectionId } = this.props;
+        const { sectionInfo,sectionId,toolicon,disabled,_runTool} = this.props;
         return (
             <div className="ItemList">
                 <div className="title">
@@ -21,7 +21,7 @@ class ItemList extends Component {
                     </ul>
                 </div>
                 <div className="ItemListInfo">
-                    <ItemListInfo {...sectionInfo} sectionId={sectionId}/>
+                    <ItemListInfo {...sectionInfo} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool}/>
                 </div>
             </div>
         )

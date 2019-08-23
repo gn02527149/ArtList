@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addeditList,delWorksection,changeTools } from '../actions'
+import { addeditList,delWorksection,changeTools,deleditList } from '../actions'
 import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
 import ItemList from '../components/ItemList'
@@ -29,7 +29,14 @@ class Worksection extends Component {
     let id = e.currentTarget.id.split("_")[2]
     let el = e.currentTarget.id.split("_")[1]
     this.props.changeTools(id,el)
-    console.log(id,el);
+  }
+  _runTool=(e)=>{
+    e.preventDefault();
+    let tooltype = e.currentTarget.className.split("icon ")[0]
+    let id = e.currentTarget.id.split("toolicon_")[1]
+    if(tooltype === "del"){
+        this.props.deleditList(id)
+    }
   }
   genTitleName(info,index){
     return (
@@ -50,7 +57,7 @@ class Worksection extends Component {
             <TitleName {...info} />
             <Typesetting {...info} />
           </div>
-          <ItemList {...info}/>
+          <ItemList {...info} _runTool={this._runTool}/>
         </div>
       </div>
     )
@@ -73,6 +80,7 @@ export default connect(
   dispatch => bindActionCreators({
     addeditList,
     delWorksection,
-    changeTools
+    changeTools,
+    deleditList
   }, dispatch)
 )(Worksection);

@@ -26,12 +26,11 @@ class ItemListInfo extends Component {
         }   
     }
     genItemInfos(info,index){
-        const { sectionId } = this.props
+        const { sectionId,toolicon,disabled,_runTool } = this.props
         return (
-            <div className="itemInfos" key={`itemInfos_${sectionId}${index}`} id={`itemInfos_${sectionId}${index}`}>
-                <ItemInfos index={index} {...info}/>
-                <div className="toolicon sorticon"><img src={sortSrc} /></div>
-                {/* <div className="toolicon delicon"><img src={delSrc} /></div> */}
+            <div className="itemInfos" key={`itemInfos_${sectionId}.${info.sectionInfoId}`} id={`itemInfos_${sectionId}.${info.sectionInfoId}`}>
+                <ItemInfos index={index} {...info} disabled={disabled}/>
+                <div className={toolicon} id={`toolicon_${sectionId}.${info.sectionInfoId}`} onClick={_runTool}><img className="sortImg" src={sortSrc} /><img className="delImg" src={delSrc} /></div>
             </div>
             
         )
