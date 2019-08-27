@@ -66,6 +66,7 @@
     "jquery": "^2.1.4",
     "react": "^0.14.4",
     "react-addons-test-utils": "0.14.4",
+    "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^0.14.4",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.3",

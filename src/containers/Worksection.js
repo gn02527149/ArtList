@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addeditList,delWorksection,changeTools,deleditList } from '../actions'
+import { addeditList,delWorksection,changeTools,deleditList,sorteditList } from '../actions'
 import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
 import ItemList from '../components/ItemList'
@@ -36,6 +36,8 @@ class Worksection extends Component {
     let id = e.currentTarget.id.split("toolicon_")[1]
     if(tooltype === "del"){
         this.props.deleditList(id)
+    }else if(tooltype === "sort"){
+        this.props.sorteditList(id)
     }
   }
   genTitleName(info,index){
@@ -81,6 +83,7 @@ export default connect(
     addeditList,
     delWorksection,
     changeTools,
-    deleditList
+    deleditList,
+    sorteditList
   }, dispatch)
 )(Worksection);

@@ -40,6 +40,23 @@ export const changeTools = (id,el) => {
     };
 };
 
+/* section: 列移動 */
+export const sorteditList = (id) => {
+    return {
+        type: types.SORT_EDITLIST,
+        id
+    };
+};
+
+/* section: 列移動 */
+export const changesectionName = (name) => {
+    return {
+        type: types.CHANGE_SENNAME,
+        name
+    };
+};
+
+
 // /* section: 儲存/預覽 */
 // export const editList = (id, message) => {
 //     return {

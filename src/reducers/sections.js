@@ -19,7 +19,7 @@ let initialSection = {    //大
     delclassName: "del",
     toolicon:"toolicon",
     disabled:"",
-    sectionName: "開始畫面",
+    sectionName: "",
     arrange: "美術決定",
     sectionInfo:
     {
@@ -33,7 +33,7 @@ let initialSection = {    //大
     sectionId:listId++
 };
 let initialState = { //全部
-    data: [initialSection]
+    data: []
 };
 
 const sections = (state = initialState, action) => {
@@ -42,7 +42,6 @@ const sections = (state = initialState, action) => {
             let newdata = {
                 ...initialSection,
                 sectionId:listId++,
-                serialNumber:serialNum++
             }
             return {
                 ...state,
@@ -51,12 +50,13 @@ const sections = (state = initialState, action) => {
         case types.DEL_WORKSECTION:
             return {
                 ...state,
-                data: state.data.filter((list) => parseInt(action.id) !== parseInt(list.sectionId))
+                data: state.data.filter((list) => Number(action.id) !== Number(list.sectionId))
             }
         case types.ADD_EDITLIST:
             let _newItem = {
                 ...initialinfoItem,
                 sectionInfoId: listKId++,
+                serialNumber: serialNum++
             }
             let _addListDate = {
                 ...state.data,
@@ -80,6 +80,7 @@ const sections = (state = initialState, action) => {
         case types.DEL_EDITLIST:
                 let parentsID = action.id.split('.')[0]
                 let listID = action.id.split('.')[1]
+                console.log(listID,parentsID)
                 let _newListDate = {
                     ...state.data,
                     [parentsID]: {
@@ -87,7 +88,7 @@ const sections = (state = initialState, action) => {
                         sectionInfo: {
                             ...state.data[parentsID].sectionInfo,
                             infoItem: [
-                                ...state.data[parentsID].sectionInfo.infoItem.filter((el) => parseInt(listID) !== parseInt(el.sectionInfoId))
+                                ...state.data[parentsID].sectionInfo.infoItem.filter((el) => Number(listID) !== Number(el.sectionInfoId))
                             ]
                         }
                     }
@@ -118,8 +119,16 @@ const sections = (state = initialState, action) => {
             return {
                 ...state,
                 data: result2
-
             }
+        case types.CHANGE_SENNAME:
+            let sectionNamedata = {
+                ...initialSection,
+                sectionName: action.name
+            }
+            return {
+                ...state,
+                data: sectionNamedata
+            }     
         default:
             return state;
     };
