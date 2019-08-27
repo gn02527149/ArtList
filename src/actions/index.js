@@ -1,9 +1,10 @@
 import * as types from '../constants/ActionTypes';
 
 /* section: 加入畫面 */
-export const addWorksection = () => {
+export const addWorksection = (name) => {
     return {
-        type: types.ADD_WORKSECTION
+        type: types.ADD_WORKSECTION,
+        name
     };
 };
 

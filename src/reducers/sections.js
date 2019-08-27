@@ -42,6 +42,7 @@ const sections = (state = initialState, action) => {
             let newdata = {
                 ...initialSection,
                 sectionId:listId++,
+                sectionName: action.name
             }
             return {
                 ...state,
@@ -81,6 +82,13 @@ const sections = (state = initialState, action) => {
                 let parentsID = action.id.split('.')[0]
                 let listID = action.id.split('.')[1]
                 console.log(listID,parentsID)
+
+                // state.data.forEach((item, id, array)=>{
+                //     if(id == item['sectionId']) {
+
+                //     }
+                // });
+
                 let _newListDate = {
                     ...state.data,
                     [parentsID]: {
@@ -120,15 +128,6 @@ const sections = (state = initialState, action) => {
                 ...state,
                 data: result2
             }
-        case types.CHANGE_SENNAME:
-            let sectionNamedata = {
-                ...initialSection,
-                sectionName: action.name
-            }
-            return {
-                ...state,
-                data: sectionNamedata
-            }     
         default:
             return state;
     };

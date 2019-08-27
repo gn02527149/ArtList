@@ -1,21 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addWorksection,changesectionName } from '../actions'
+import { addWorksection } from '../actions'
 
 import '../assets/styles/Modal.scss'
 
 class Modal extends Component {
   constructor(props){
     super(props)
-  }
-  _onchange=(e)=>{
-    let titleName = e.target.value
-    this.props.changesectionName(titleName)
+    // this.inputNewName = React.createRef();
   }
   _onAdd=()=>{
-    this.props.addWorksection()
+    this.props.addWorksection(this.refs.inputNewName.value)
     this._closeModal()
+    this.refs.inputNewName.value=""
   }
   _closeModal=()=>{
     let modals = document.getElementsByClassName('modals')[0]
@@ -32,7 +30,7 @@ class Modal extends Component {
                 <div className="content">
                     <div className="info">
                       <span>畫面名稱</span>
-                      <input type="text" defaultValue="" onChange={this._onchange}></input>
+                      <input type="text" defaultValue="" ref="inputNewName"></input>
                     </div>
                     <div className="buttons">
                         <div className="closeBtn" onClick={this._closeModal}>取消</div>
@@ -51,7 +49,6 @@ export default connect(
   }),
   dispatch => bindActionCreators({
     addWorksection,
-    changesectionName
   }, dispatch)
 )(Modal);
 
