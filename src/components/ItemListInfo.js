@@ -29,11 +29,11 @@ class ItemListInfo extends Component {
         const { sectionId,toolicon,disabled,_runTool } = this.props
         return (
             <div className="itemInfos" 
-            key={`itemInfos_${sectionId}.${index}${info.sectionInfoId}`} 
-            id={`itemInfos_${sectionId}.${index}${info.sectionInfoId}`} 
+            key={`itemInfos_${sectionId}.${info.sectionInfoId}`} 
+            id={`itemInfos_${sectionId}.${info.sectionInfoId}`} 
             >
                 <ItemInfos index={index} {...info} disabled={disabled}/>
-                <div className={toolicon} id={`toolicon_${sectionId}.${index}${info.sectionInfoId}`} onClick={_runTool}><img className="sortImg" src={sortSrc} /><img className="delImg" src={delSrc} /></div>
+                <div className={toolicon} id={`toolicon_${sectionId}.${info.sectionInfoId}`} onClick={_runTool}><img className="sortImg" src={sortSrc} /><img className="delImg" src={delSrc} /></div>
             </div>
             
         )

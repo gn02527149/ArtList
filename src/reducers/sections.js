@@ -79,35 +79,35 @@ const sections = (state = initialState, action) => {
                 data: addListresult
             }
         case types.DEL_EDITLIST:
-                let parentsID = action.id.split('.')[0]
-                let listID = action.id.split('.')[1]
-                console.log(listID,parentsID)
+            let parentsID = action.id.split('.')[0]
+            let listID = action.id.split('.')[1]
+            let ID;
+            
+            state.data.forEach((item, id)=>{
+                if(parentsID == item.sectionId) {
+                    ID = id
+                }
+            });
 
-                // state.data.forEach((item, id, array)=>{
-                //     if(id == item['sectionId']) {
-
-                //     }
-                // });
-
-                let _newListDate = {
-                    ...state.data,
-                    [parentsID]: {
-                        ...state.data[parentsID],
-                        sectionInfo: {
-                            ...state.data[parentsID].sectionInfo,
-                            infoItem: [
-                                ...state.data[parentsID].sectionInfo.infoItem.filter((el) => Number(listID) !== Number(el.sectionInfoId))
-                            ]
-                        }
+            let _newListDate = {
+                ...state.data,
+                [ID]: {
+                    ...state.data[ID],
+                    sectionInfo: {
+                        ...state.data[ID].sectionInfo,
+                        infoItem: [
+                            ...state.data[ID].sectionInfo.infoItem.filter((el) =>Number(listID) !== Number(el.sectionInfoId))
+                        ]
                     }
                 }
-                let delListresult = Object.keys(_newListDate).map(function(key) {
-                    return _newListDate[key];
-                });
-                return {
-                    ...state,
-                    data: delListresult
-                }
+            }
+            let delListresult = Object.keys(_newListDate).map(function(key) {
+                return _newListDate[key];
+            });
+            return {
+                ...state,
+                data: delListresult
+            }
         case types.CHANGE_TOOLS:
             let icontype = action.el+'icon toolicon'
             let _changeDate = {

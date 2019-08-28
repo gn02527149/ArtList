@@ -44,11 +44,27 @@
     height: calc(100% - 120px);
     font-size: 20px;
 }
+.modal .content .info.caveat{
+    position: relative;
+}
+.modal .content .info.caveat::after{
+    content: "!";
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #ff0000;
+}
 .modal .content .info input{
     padding-left: 10px;
     box-sizing: border-box;
     margin-left: 10px;
 }
+.modal .content .info input.caveat{
+    border: 1px solid #ff0000;
+}
+
 .modal .content .buttons{
     display: flex;
     justify-content: space-around;
