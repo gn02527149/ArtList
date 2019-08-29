@@ -1,38 +1,59 @@
 var path = require('path');
 var webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = {
     devtool: 'eval',
-    entry: [
-        'webpack-hot-middleware/client',
-        './src/app'
-    ],
+    watch: true,
+    target: 'electron-renderer',
+    entry: './src/app',
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, '/build'),
         filename: 'bundle.js',
-        publicPath: '/static/'
+        publicPath: 'build/'
     },
-    plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ],
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.js$/,
-                loaders: ['babel'],
-                exclude: /node_modules/,
-                include: path.join(__dirname, 'src')
+                test: /\.(jsx|js)?$/,
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                    "@babel/preset-env",
+                    "@babel/preset-react"]
+                }
             },
             {
-                test: /\.(css|scss)$/,
-                loaders: ['style', 'css', 'sass']
+                test: /\.(scss|css)?$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    'sass-loader'
+                ]
             },
             {
-                test: /\.(png|jpg|jpeg|gif|ico|svg)$/,
-                loader: 'url?limit=8192'
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 8192
+                }
             }
         ]
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('development'),
+                'BROWSER': true
+            }
+        }),
+        new MiniCssExtractPlugin({
+            filename: "bundle.css"
+        })
+    ],
+
+    resolve: {
+      extensions: ['.js', '.json', '.jsx']
     }
 };

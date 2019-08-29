@@ -8,7 +8,7 @@ let initialinfoItem = {    //小
     type:"LOGO",
     name:"範例文字",
     explanation:"說明",
-    fileName:"logo.png",
+    fileName:"",
     serialNumber:serialNum++,
     sectionInfoId:listKId++,
 };
@@ -23,9 +23,7 @@ let initialSection = {    //大
     arrange: "美術決定",
     sectionInfo:
     {
-        imgs:[
-            ""
-        ],
+        imgs:[],
         infoItem:[
             initialinfoItem
         ]
@@ -107,6 +105,32 @@ const sections = (state = initialState, action) => {
             return {
                 ...state,
                 data: delListresult
+            }
+        case types.ADD_REFERVIEW:
+            let ImgPId;
+            state.data.forEach((item, id)=>{
+                if(action.id == item.sectionId) {
+                    ImgPId = id
+                }
+            });
+            let _addIMGDate = {
+                ...state.data,
+                [ImgPId]: {
+                    ...state.data[ImgPId],
+                    sectionInfo: {
+                        ...state.data[ImgPId].sectionInfo,
+                        imgs: [
+                            ...state.data[ImgPId].sectionInfo.imgs.concat(action.src)
+                        ]
+                    }
+                }
+            }
+            let addIMGresult = Object.keys(_addIMGDate).map(function(key) {
+                return _addIMGDate[key];
+            });
+            return {
+                ...state,
+                data: addIMGresult
             }
         case types.CHANGE_TOOLS:
             let icontype = action.el+'icon toolicon'

@@ -32,6 +32,22 @@ export const deleditList = (id) => {
     };
 };
 
+/* section: 加入參考圖片 */
+export const addreferView = (id,src) => {
+    return {
+        type: types.ADD_REFERVIEW,
+        id,
+        src
+    };
+};
+
+/* section: 刪除參考圖片 */
+export const delreferView = (id) => {
+    return {
+        type: types.DEL_REFERVIEW,
+        id
+    };
+};
 /* section: 功能更換 */
 export const changeTools = (id,el) => {
     return {
@@ -48,15 +64,6 @@ export const sorteditList = (id) => {
         id
     };
 };
-
-/* section: 列移動 */
-export const changesectionName = (name) => {
-    return {
-        type: types.CHANGE_SENNAME,
-        name
-    };
-};
-
 
 // /* section: 儲存/預覽 */
 // export const editList = (id, message) => {

@@ -37,11 +37,14 @@
     font-size: 26px;
     letter-spacing: 1px;
 }
+.modal .content{
+    height: calc(100% - 60px);
+}
 .modal .content .info{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100% - 120px);
+    height: calc(100% - 60px);
     font-size: 20px;
 }
 .modal .content .info.caveat{
@@ -60,6 +63,9 @@
     padding-left: 10px;
     box-sizing: border-box;
     margin-left: 10px;
+    height: 30px;
+    width: 200px;
+    font-size: 20px;
 }
 .modal .content .info input.caveat{
     border: 1px solid #ff0000;

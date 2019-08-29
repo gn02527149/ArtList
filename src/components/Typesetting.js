@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import './Typesetting.scss'
+import '../assets/styles/Typesetting.scss'
 
 class Typesetting extends Component {
   constructor(props) {

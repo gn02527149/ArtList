@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addeditList,delWorksection,changeTools,deleditList,sorteditList } from '../actions'
+import { addeditList,delWorksection,changeTools,deleditList,sorteditList,addreferView } from '../actions'
 import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
 import ItemList from '../components/ItemList'
@@ -40,6 +40,23 @@ class Worksection extends Component {
         this.props.sorteditList(id)
     }
   }
+  _addreferView=(e)=>{
+    e.preventDefault();
+    let str = e.target.id
+    let num = str.substr(str.length-1)
+    
+    if (e.target.files.length > 0) {
+        let curFile = e.target.files[0];
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          let src = e.target.result;   
+          this.props.addreferView(num,src)
+        };
+        if (curFile) {
+            reader.readAsDataURL(curFile);}
+    }
+    
+  }
   genTitleName(info,index){
     return (
       <div key={`Worksection_${info.sectionId}`} id={`Worksection_${info.sectionId}`}>
@@ -52,14 +69,14 @@ class Worksection extends Component {
           </div>
           <div  className="appendrow" id={`appendrow_${index}`} onClick={this._onAddList}>新增一列</div>
           <div  className="sortpage">排序畫面</div>
-          <div  className="delsection" id={`delsection_${info.sectionId}`}  onClick={this._onDelsection}>刪除畫面</div>
+          <div  className="delsection" id={`delsection_${info.sectionId}`} onClick={this._onDelsection}>刪除畫面</div>
         </div>
         <div className="Worksection">
           <div className="worktitle">
             <TitleName {...info} />
             <Typesetting {...info} />
           </div>
-          <ItemList {...info} _runTool={this._runTool}/>
+          <ItemList {...info} _runTool={this._runTool} _addreferView={this._addreferView}/>
         </div>
       </div>
     )
@@ -84,6 +101,7 @@ export default connect(
     delWorksection,
     changeTools,
     deleditList,
-    sorteditList
+    sorteditList,
+    addreferView
   }, dispatch)
 )(Worksection);

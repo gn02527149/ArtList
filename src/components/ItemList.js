@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import ItemListInfo from './ItemListInfo'
-import './ItemList.scss'
+import '../assets/styles/ItemList.scss'
 
 class ItemList extends Component {
     constructor(props){
         super(props)
     }
     render(){
-        const { sectionInfo,sectionId,toolicon,disabled,_runTool} = this.props;
+        const { sectionInfo,sectionId,toolicon,disabled,_runTool,_addreferView} = this.props;
         return (
             <div className="ItemList">
                 <div className="title">
@@ -21,7 +21,7 @@ class ItemList extends Component {
                     </ul>
                 </div>
                 <div className="ItemListInfo">
-                    <ItemListInfo {...sectionInfo} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool}/>
+                    <ItemListInfo {...sectionInfo} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool} _addreferView={_addreferView}/>
                 </div>
             </div>
         )

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import './ItemInfos.scss'
+import '../assets/styles/ItemInfos.scss'
 
 class ItemInfos extends Component {
   constructor() {
