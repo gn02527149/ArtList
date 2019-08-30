@@ -58,10 +58,10 @@ export const changeTools = (id,el) => {
 };
 
 /* section: 列移動 */
-export const sorteditList = (id) => {
+export const sorteditList = (data) => {
     return {
         type: types.SORT_EDITLIST,
-        id
+        data
     };
 };
 

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import ItemListInfo from './ItemListInfo'
-import '../assets/styles/ItemList.scss'
+import ListItem from './ListItem'
+import '../assets/styles/ListContainer.scss'
 
-class ItemList extends Component {
+class ListContainer extends Component {
     constructor(props){
         super(props)
     }
@@ -20,12 +20,12 @@ class ItemList extends Component {
                         <li className="fx3">參考畫面</li>
                     </ul>
                 </div>
-                <div className="ItemListInfo">
-                    <ItemListInfo {...sectionInfo} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool} _addreferView={_addreferView}/>
+                <div className="ListItem">
+                    <ListItem {...sectionInfo} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool} _addreferView={_addreferView}/>
                 </div>
             </div>
         )
     }
 }
   
-export default ItemList;
+export default ListContainer;

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addeditList,delWorksection,changeTools,deleditList,sorteditList,addreferView } from '../actions'
+import { addeditList,delWorksection,changeTools,deleditList,sorteditList,addreferView,delreferView } from '../actions'
 import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
-import ItemList from '../components/ItemList'
+import ListContainer from '../components/ListContainer'
 import editSrc from '../assets/images/switch_edit_2.svg'
 import sortSrc from '../assets/images/switch_sort_2.svg'
 import delSrc from '../assets/images/switch_deleteRow_2.svg'
@@ -30,14 +30,22 @@ class Worksection extends Component {
     let el = e.currentTarget.id.split("_")[1]
     this.props.changeTools(id,el)
   }
-  _runTool=(e)=>{
+  _runTool=(e,data)=>{
+    // console.log('_runTool',data)
     e.preventDefault();
     let tooltype = e.currentTarget.className.split("icon ")[0]
-    let id = e.currentTarget.id.split("toolicon_")[1]
-    if(tooltype === "del"){
-        this.props.deleditList(id)
-    }else if(tooltype === "sort"){
-        this.props.sorteditList(id)
+    if(e.currentTarget.id.split("_")[1] == "img"){
+      let id = e.currentTarget.id.split("toolicon_img_")[1]
+      this.props.delreferView(id)
+    }else{
+      // console.log('2',data)
+      let id = e.currentTarget.id.split("toolicon_")[1]
+      if(tooltype === "del"){
+          this.props.deleditList(id)
+      }else if(tooltype === "sort"){
+          this.props.sorteditList(data)
+          // console.log('sort',data)
+      }
     }
   }
   _addreferView=(e)=>{
@@ -76,7 +84,7 @@ class Worksection extends Component {
             <TitleName {...info} />
             <Typesetting {...info} />
           </div>
-          <ItemList {...info} _runTool={this._runTool} _addreferView={this._addreferView}/>
+          <ListContainer {...info} _runTool={this._runTool} _addreferView={this._addreferView}/>
         </div>
       </div>
     )
@@ -102,6 +110,7 @@ export default connect(
     changeTools,
     deleditList,
     sorteditList,
-    addreferView
+    addreferView,
+    delreferView
   }, dispatch)
 )(Worksection);

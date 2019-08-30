@@ -132,6 +132,36 @@ const sections = (state = initialState, action) => {
                 ...state,
                 data: addIMGresult
             }
+        case types.DEL_REFERVIEW:
+            let ImgparentsID = action.id.split('.')[0]
+            let IMGID = action.id.split('.')[1]
+            let PID;
+
+            state.data.forEach((item, id)=>{
+                if(ImgparentsID == item.sectionId) {
+                    PID = id
+                }
+            });
+
+            let _newListDate1 = {
+                ...state.data,
+                [PID]: {
+                    ...state.data[PID],
+                    sectionInfo: {
+                        ...state.data[PID].sectionInfo,
+                        imgs: [
+                            ...state.data[PID].sectionInfo.imgs.filter((el,i) =>Number(IMGID) !== Number(i))
+                        ]
+                    }
+                }
+            }
+            let delListresult1 = Object.keys(_newListDate1).map(function(key) {
+                return _newListDate1[key];
+            });
+            return {
+                ...state,
+                data: delListresult1
+            }
         case types.CHANGE_TOOLS:
             let icontype = action.el+'icon toolicon'
             let _changeDate = {
@@ -151,6 +181,11 @@ const sections = (state = initialState, action) => {
             return {
                 ...state,
                 data: result2
+            }
+        case types.CHANGE_TOOLS:
+            return {
+                ...state,
+                data: action.data
             }
         default:
             return state;

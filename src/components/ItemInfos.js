@@ -12,7 +12,7 @@ class ItemInfos extends Component {
             <li className="fx1"><input type="text" defaultValue={type} disabled={disabled}></input></li>
             <li className="fx1"><textarea type="text" defaultValue={name} disabled={disabled}></textarea></li>
             <li className="fx3"><textarea type="text" defaultValue={explanation} disabled={disabled}></textarea></li>
-            <li className="fx1"><input className="itemInfoFile" type="file" defaultValue={fileName} disabled={disabled}></input></li>
+            <li className="fx1"><input className="itemInfoFile" type="file" defaultValue={fileName} disabled={disabled} accept="image/*"></input></li>
             <li className="fx1"><input type="text" defaultValue={serialNumber} disabled={disabled}></input></li>
         </ul>
     )
