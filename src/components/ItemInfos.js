@@ -6,15 +6,31 @@ class ItemInfos extends Component {
     super();
   }
   render(){
-    const { type, name, serialNumber,explanation, fileName,disabled} = this.props
+    const { type, name , explanation, fileName,disabled,_getFile,sectionInfoId,index,sectionId } = this.props
     return (
-        <ul className="itemInfo fx1">
-            <li className="fx1"><input type="text" defaultValue={type} disabled={disabled}></input></li>
-            <li className="fx1"><textarea type="text" defaultValue={name} disabled={disabled}></textarea></li>
-            <li className="fx3"><textarea type="text" defaultValue={explanation} disabled={disabled}></textarea></li>
-            <li className="fx1"><input className="itemInfoFile" type="file" defaultValue={fileName} disabled={disabled} accept="image/*"></input></li>
-            <li className="fx1"><input type="text" defaultValue={serialNumber} disabled={disabled}></input></li>
-        </ul>
+      <ul className={`itemInfo fx1 ${disabled}`}>
+          <li className="fx1">
+            <select disabled={disabled} defaultValue={type}>
+                <option value="logo">LOGO</option>
+                <option value="bg">背景圖</option>
+                <option value="bar">面板(進度條)</option>
+                <option value="panel">面板(彈窗背景)</option>
+                <option value="btn_icon">圖示按鈕</option>
+                <option value="btn">一般按鈕</option>
+                <option value="icon">圖示</option>
+                <option value="effect">特效</option>
+                <option value="art_text">美術字</option>
+                <option value="other">其他</option>
+            </select>
+          </li>
+          <li className="fx1"><textarea type="text" defaultValue={name} disabled={disabled}></textarea></li>
+          <li className="fx3"><textarea type="text" defaultValue={explanation} disabled={disabled}></textarea></li>
+          <li className="fx1 itemFile">
+            <input className="itemInfoFile" id={`itemInfoFile_${sectionId}.${sectionInfoId}`} type="file" onChange={_getFile} disabled={disabled} accept="image/*"></input>
+            <label htmlFor={`itemInfoFile_${sectionId}.${sectionInfoId}`}>{fileName}</label>
+          </li>
+          <li className="fx1"><input type="text" defaultValue={index+1} disabled={disabled}></input></li>
+      </ul>
     )
   }
 }

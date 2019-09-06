@@ -1,50 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import ItemInfos from './ItemInfos'
+import ViewBox from './ViewBox'
 import sortSrc from '../assets/images/switch_sort_2.svg'
 import delSrc from '../assets/images/switch_deleteRow_2.svg'
-
 import '../assets/styles/ListItem.scss'
-
-
 
 class ListItem extends Component {
     constructor(props){
         super(props)
         this.state = {...props};
     }
-    _addreferView(e) {
-        let str = e.target.id
-        let num = str.substr(str.length-1)
-        
-        if (e.target.files.length > 0) {
-            let curFile = e.target.files[0];
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                document.getElementById('preview_img_'+num).setAttribute("src",e.target.result)
-            };
-            if (curFile) {
-                reader.readAsDataURL(curFile);}
-        }   
-    }
-    
     //移動
     dragStart(e) {
         this.dragged = e.currentTarget;
     }
     dragEnd(e) {
-        const { _runTool } = this.props
+        const { _runTool,infoItem } = this.props
         this.dragged.style.display = 'block';
 
-        // console.log(e.currentTarget,this.over)
-
-        e.target.classList.remove("drag-up");
+        e.currentTarget.classList.remove("drag-up");
         this.over.classList.remove("drag-up");
 
-        e.target.classList.remove("drag-down");
+        e.currentTarget.classList.remove("drag-down");
         this.over.classList.remove("drag-down");
         
-
-        var data = this.state.data;
+        var data = infoItem;
         var from = Number(this.dragged.dataset.id);
         var to = Number(this.over.dataset.id);
         data.splice(to, 0, data.splice(from, 1)[0]);
@@ -54,79 +34,63 @@ class ListItem extends Component {
             doc.newIndex = index + 1;
             return doc;
         })
-        _runTool(e.target.id,data)
+        let PID = this.dragged.id.split("itemInfos_")[1].split(".")[0]
+        _runTool(e,data,PID)
     }
     dragOver(e) {
-        
         e.preventDefault();
 
+        let EParent = e.target.parentElement.parentElement.parentElement
+    
         this.dragged.style.display = "none";
         
-        // if (e.target.tagName !== "LI") {
-        //     return;
-        // }
-
+        if (EParent.className !== "itemInfos") {
+            return;
+        }
+        
         //判断当前拖拽target 和 经过的target 的 newIndex
-
-        const dgIndex = JSON.parse(this.dragged.dataset.info).newIndex;
-        const taIndex = JSON.parse(e.target.dataset.info).newIndex;
+    
+        const dgIndex = this.dragged.dataset.id;
+        const taIndex = EParent.dataset.id;
         const animateName = dgIndex > taIndex ? "drag-up" : "drag-down";
 
-
-        if (this.over && e.target.dataset.info !== this.over.dataset.info) {
-            this.over.classList.remove("drag-up", "drag-down");
+        if (this.over && EParent.dataset.item !== this.over.dataset.item) {
+          this.over.classList.remove("drag-up", "drag-down");
         }
 
-        if(!e.target.classList.contains(animateName)) {
-            e.target.classList.add(animateName);
-            this.over = e.target;
+        if(!EParent.classList.contains(animateName)) {
+          EParent.classList.add(animateName);
+          this.over = EParent;
         }
     }
-    genItemInfos(info,index){
-        const { sectionId,toolicon,disabled,_runTool } = this.props
+    genItemInfos(info, index){
+        const { sectionId, toolicon, disabled, _runTool, _getFile, draggable } = this.props
         return (
             <div className="itemInfos" 
             data-id={index}
             key={`itemInfos_${sectionId}.${info.sectionInfoId}`} 
             id={`itemInfos_${sectionId}.${info.sectionInfoId}`} 
-            draggable='true'
+            draggable={draggable}
             onDragEnd={this.dragEnd.bind(this)}
             onDragStart={this.dragStart.bind(this)}
-            data-item={JSON.stringify(info)}
-            >
-                <ItemInfos index={index} {...info} disabled={disabled}/>
+            data-item={JSON.stringify(info)}>
+                <ItemInfos index={index} {...info} disabled={disabled} _getFile={_getFile} sectionId={sectionId}/>
                 <div className={toolicon} id={`toolicon_${sectionId}.${info.sectionInfoId}`} onClick={_runTool}><img className="sortImg" src={sortSrc} /><img className="delImg" src={delSrc} /></div>
             </div>
             
         )
     }
-    genIMGs(info,index){
-        const { sectionId,imgs,toolicon,_runTool} = this.props
-        let src = imgs[index]==0?"":imgs[index]
-        return (
-            <div key={`preview_img_${sectionId}.${index}`} id={`preview_imgBox_${sectionId}${index}`} className="preview_imgBox">
-                <img id={`preview_img_${sectionId}.${index}`} src={src}/>
-                <div className={toolicon} id={`toolicon_img_${sectionId}.${index}`} onClick={_runTool}><img className="delImg" src={delSrc} /></div>
-            </div>
-        )
-    }
-    
     render(){
-        const { sectionId,infoItem,_addreferView,imgs,disabled } = this.props
+        const { sectionId, infoItem, _addreferView, imgs, disabled, toolicon, _runTool } = this.props
         return (
             <div>
                 <div className="itemInfoBox fx7" onDragOver={this.dragOver.bind(this)}>
                     {infoItem.map((info,index) =>this.genItemInfos(info,index))}
                 </div>
-                <div className="viewBox fx1">
-                    <input id={`viewBoxInput_${sectionId}`} type="file" onChange={_addreferView} disabled={disabled} accept="image/*"></input>
-                    <label htmlFor={`viewBoxInput_${sectionId}`}>
-                        {imgs.map((info,index) =>this.genIMGs(info,index))}
-                    </label>
-                </div>
+                <ViewBox sectionId={sectionId} _addreferView={_addreferView} imgs={imgs} disabled={disabled} toolicon={toolicon} _runTool={_runTool}/>
             </div>
         )
     }
 }
-  
-export default ListItem;
+
+export default ListItem

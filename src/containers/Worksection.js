@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addeditList,delWorksection,changeTools,deleditList,sorteditList,addreferView,delreferView } from '../actions'
+import { addeditList,delWorksection,changeTools,deleditList,sorteditList,addreferView,delreferView,updateFileInfo } from '../actions'
 import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
 import ListContainer from '../components/ListContainer'
@@ -30,21 +30,18 @@ class Worksection extends Component {
     let el = e.currentTarget.id.split("_")[1]
     this.props.changeTools(id,el)
   }
-  _runTool=(e,data)=>{
-    // console.log('_runTool',data)
+  _runTool=(e,data,PID)=>{
     e.preventDefault();
     let tooltype = e.currentTarget.className.split("icon ")[0]
     if(e.currentTarget.id.split("_")[1] == "img"){
       let id = e.currentTarget.id.split("toolicon_img_")[1]
       this.props.delreferView(id)
     }else{
-      // console.log('2',data)
       let id = e.currentTarget.id.split("toolicon_")[1]
       if(tooltype === "del"){
           this.props.deleditList(id)
-      }else if(tooltype === "sort"){
-          this.props.sorteditList(data)
-          // console.log('sort',data)
+      }else if(tooltype === "itemInfos"){
+          this.props.sorteditList(data,PID)
       }
     }
   }
@@ -65,6 +62,19 @@ class Worksection extends Component {
     }
     
   }
+  _openModal=()=>{
+    let modals = document.getElementsByClassName('modals')[0]
+    let sortSectionModal = document.getElementsByClassName('sortSectionModal')[0]
+    modals.classList.add("ModalBlock");
+    sortSectionModal.classList.add("ModalBlock");
+  }
+  _getFile=(e)=>{
+    e.preventDefault();
+    let filename = e.target.value.split("\\").reverse()[0];
+    let Pid = e.target.id.split("itemInfoFile_")[1].split(".")[0];
+    let id = e.target.id.split("itemInfoFile_")[1].split(".")[1];
+    this.props.updateFileInfo(Pid,id,filename)
+  }
   genTitleName(info,index){
     return (
       <div key={`Worksection_${info.sectionId}`} id={`Worksection_${info.sectionId}`}>
@@ -76,7 +86,7 @@ class Worksection extends Component {
             <span id={`tool_del_${index}`} onClick={this._changeTools} className={info.delclassName}><img src={delSrc} /></span>
           </div>
           <div  className="appendrow" id={`appendrow_${index}`} onClick={this._onAddList}>新增一列</div>
-          <div  className="sortpage">排序畫面</div>
+          <div  className="sortpage" onClick={this._openModal}>排序畫面</div>
           <div  className="delsection" id={`delsection_${info.sectionId}`} onClick={this._onDelsection}>刪除畫面</div>
         </div>
         <div className="Worksection">
@@ -84,7 +94,7 @@ class Worksection extends Component {
             <TitleName {...info} />
             <Typesetting {...info} />
           </div>
-          <ListContainer {...info} _runTool={this._runTool} _addreferView={this._addreferView}/>
+          <ListContainer {...info} _runTool={this._runTool} _addreferView={this._addreferView} _getFile={this._getFile}/>
         </div>
       </div>
     )
@@ -111,6 +121,7 @@ export default connect(
     deleditList,
     sorteditList,
     addreferView,
-    delreferView
+    delreferView,
+    updateFileInfo
   }, dispatch)
 )(Worksection);

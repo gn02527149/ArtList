@@ -30,18 +30,24 @@ class Explanation extends Component {
                         </li>
                         <li className="fx2">
                             <select>
-                                <option value="english">English（英文）</option>
-                                <option value="chinese">中文</option>
-                                <option value="japanese">日本語（日文）</option>
-                                <option value="koreana">한국어（韓文）</option>
-                                <option value="german">Deutsch（德文）</option>
+                                <option value="chinese-sim">簡中</option>
+                                <option value="english">英文</option>
+                                <option value="chinese-trad">繁中</option>
+                                <option value="japanese">日文</option>
                             </select>
                         </li>
                         <li className="fx1">
                             <select>
-                                <option value="english">廣告</option>
-                                <option value="chinese">廣告</option>
-                                <option value="japanese">廣告</option>
+                                <option value="ad">廣告</option>
+                                <option value="free">免費</option>
+                                <option value="gbp">GBP</option>
+                                <option value="myr">MYR</option>
+                                <option value="php">PHP</option>
+                                <option value="hkd">HKD</option>
+                                <option value="cad">CAD</option>
+                                <option value="twd">TWD</option>
+                                <option value="usd">USD</option>
+                                <option value="jpy">JPY</option>
                             </select>
                         </li>
                         <li className="fx1"><input type="text" defaultValue="相關連結"></input></li>

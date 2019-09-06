@@ -7,7 +7,6 @@
 }
 .itemInfo li{
     height: 100px;
-    line-height: 100px;
     border-right: 1px solid rgb(219,219,216);
     border-top: 1px solid rgb(219,219,216);
     font-size: 16px !important;
@@ -27,10 +26,82 @@
     justify-content: center;
     align-items: center;
     font-size: 16px;
+    word-break: break-all;
 }
 .itemInfo li textarea{
     line-height: initial;
 }
 
+.viewBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 3;
+    height: 100%;
+    min-height: 100px;
+    // cursor: pointer;
+}
+.viewBox *{
+    // min-height: 20px;
+    width: 100%;
+    height: 100%;
+    // cursor: pointer;
+}
+.viewBox img{
+    height: initial;
+    display: none;//
+}
 
+.viewBox input{
+    height: 20;
+    cursor: pointer;
+}
 
+.viewBox label{
+    height: 0%;
+}
+
+.itemInfos:hover .disabled *:not(.toolicon){
+    background-color: rgb(196,237,177);
+    cursor: pointer;
+}
+.itemInfo *:hover{
+    background-color: rgb(196,237,177);
+}
+.toolicon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 4px solid #8cbf73;
+    background: linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    background: -moz-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    background: -webkit-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    background: -o-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: none;//
+    min-height: initial;
+}
+.toolicon img{
+    filter: invert(90%) sepia(120%) saturate(338%) hue-rotate(70deg) brightness(60%) contrast(89%);
+    display: none;//
+}
+.toolicon:hover{
+    border: 4px solid #9bdd7c;
+    background: linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+    background: -moz-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+    background: -webkit-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+    background: -o-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+}
+.itemInfoFile{
+    display: none !important;
+}
+.itemFile label{
+    cursor: pointer;
+}

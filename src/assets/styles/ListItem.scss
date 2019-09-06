@@ -4,28 +4,7 @@
     align-items: stretch;
     background-color: #fff;
 }
-.viewBox{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex: 3;
-    height: 100%;
-    min-height: 100px;
-    cursor: pointer;
-}
-.viewBox *{
-    min-height: 100px;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-.viewBox img{
-    height: initial;
-}
-.viewBox input{
-    display: none;
-}
+
 .itemInfoBox{
     flex: 7;
     height: 100%;
@@ -47,11 +26,6 @@
     cursor: pointer;
     border: 1px solid #dbdbd8;
 }
-
-.itemInfos:hover :not(.toolicon) *{
-    background-color: rgb(196,237,177);
-}
-
 .toolicon{
     position: absolute;
     top: 50%;
@@ -81,6 +55,9 @@
     background: -moz-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
     background: -webkit-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
     background: -o-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
+}
+.toolicon:hover img{
+    filter: initial;
 }
 .itemInfos:hover .sorticon,.itemInfos:hover .delicon,.preview_imgBox:hover .delicon{
     display: flex;

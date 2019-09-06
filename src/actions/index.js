@@ -57,22 +57,40 @@ export const changeTools = (id,el) => {
     };
 };
 
-/* section: 列移動 */
-export const sorteditList = (data) => {
+/* section: 畫面移動 */
+export const sortWorksection = (data) => {
     return {
-        type: types.SORT_EDITLIST,
+        type: types.SORT_WORKSECTION,
         data
     };
 };
 
-// /* section: 儲存/預覽 */
-// export const editList = (id, message) => {
-//     return {
-//         type: types.EDIT_LIST,
-//         id,
-//         message
-//     };
-// };
+/* section: 列移動 */
+export const sorteditList = (data,PID) => {
+    return {
+        type: types.SORT_EDITLIST,
+        data,
+        PID
+    };
+};
+
+/* section: 更新輸入資訊 */
+export const updateDate = (id) => {
+    return {
+        type: types.UPDATE_DATA,
+        id
+    };
+};
+
+/* section: 帶入‘列’圖片資訊 */
+export const updateFileInfo = (Pid,id,filename) => {
+    return {
+        type: types.UPDATE_FILEINFO,
+        Pid,
+        id,
+        filename
+    };
+};
 
 // /* section: 新增參考圖片 */
 // export const editList = (id, message) => {

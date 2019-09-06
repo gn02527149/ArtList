@@ -10,4 +10,7 @@ export const DEL_EDITLIST     = 'DEL_EDITLIST';
 export const ADD_REFERVIEW    = 'ADD_REFERVIEW';
 export const DEL_REFERVIEW    = 'DEL_REFERVIEW';
 export const CHANGE_TOOLS     = 'CHANGE_TOOLS';
+export const SORT_WORKSECTION = 'SORT_WORKSECTION';
 export const SORT_EDITLIST    = 'SORT_EDITLIST';
+export const UPDATE_DATA      = 'UPDATE_DATA';
+export const UPDATE_FILEINFO  = 'UPDATE_FILEINFO';

@@ -200,7 +200,7 @@ body {
 .itemInfo li textarea {
   line-height: initial; }
 
-.ItemListInfo > div {
+.ListItem > div {
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -298,7 +298,7 @@ body {
   position: relative; }
 
 .preview_imgBox:hover:before {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(196, 237, 177, 0.5);
   content: "";
   position: absolute;
   width: 100%;
@@ -306,7 +306,31 @@ body {
   left: 0;
   top: 0; }
 
-.ItemList li {
+.drag-up {
+  animation: dragup ease 0.2s 1;
+  animation-fill-mode: forwards;
+  border: solid 2px #cccccc; }
+
+.drag-down {
+  animation: dragdown ease 0.2s 1;
+  animation-fill-mode: forwards;
+  border: solid 2px #cccccc; }
+
+@keyframes dragup {
+  from {
+    margin-top: 10px; }
+  to {
+    margin-top: 60px; } }
+
+@keyframes dragdown {
+  from {
+    margin-bottom: 10px;
+    margin-top: 60px; }
+  to {
+    margin-bottom: 60px;
+    margin-top: 10px; } }
+
+.ListContainer li {
   font-size: 18px; }
 
 .Worksection {
