@@ -2,14 +2,14 @@ import * as types from '../constants/ActionTypes';
 
 let listId = 0;
 let listKId = 1;
-let serialNum = 1;
 
 let initialinfoItem = {    //小
-    type:"icon",
+    type:"",
     name:"範例文字",
     explanation:"說明",
     fileName:"選擇檔案",
     sectionInfoId:listKId++,
+    parentsID: ""
 };
 
 let initialSection = {    //大
@@ -20,154 +20,145 @@ let initialSection = {    //大
     disabled:"",
     draggable:false,
     sectionName: "",
-    arrange: "美術決定",
-    sectionInfo:
-    {
-        imgs:[],
-        infoItem:[
-            initialinfoItem
-        ]
-    },
+    arrange: "artDecision",
     sectionId:listId++
 };
+let initialImgs ={
+    imgSrc:[],
+    parentsID: ""
+};
+
 let initialState = { //全部
-    data: []
+    fileName: "",
+    sectionData: [],
+    infoItem:[],
+    Imgs:[]
 };
 
 const sections = (state = initialState, action) => {
     switch (action.type) {
+        case types.LOAD_FILENAME:
+            return {
+                ...state,
+                fileName: action.filename
+            }
         case types.ADD_WORKSECTION:
-            let newdata = {
+            let listNewId = listId++
+            let newsection = {
                 ...initialSection,
-                sectionId:listId++,
+                sectionId:listNewId,
                 sectionName: action.name
+            }
+            let sectionItem = {
+                ...initialinfoItem,
+                parentsID: listNewId,
+            }
+            let sectionImg= {
+                ...initialImgs,
+                parentsID: listNewId,
             }
             return {
                 ...state,
-                data: state.data.concat(newdata)
+                sectionData: state.sectionData.concat(newsection),
+                infoItem: state.infoItem.concat(sectionItem),
+                Imgs: state.Imgs.concat(sectionImg)
             }
         case types.DEL_WORKSECTION:
             return {
                 ...state,
-                data: state.data.filter((list) => Number(action.id) !== Number(list.sectionId))
+                sectionData: state.sectionData.filter((list) => Number(action.id) !== Number(list.sectionId)),
+                infoItem: state.infoItem.filter((list) => Number(action.id) !== Number(list.parentsID)),
+                Imgs: state.Imgs.filter((list) => Number(action.id) !== Number(list.parentsID))
             }
         case types.ADD_EDITLIST:
-            let _newItem = {
+            let editListItem = {
                 ...initialinfoItem,
                 sectionInfoId: listKId++,
-                serialNumber: serialNum++
+                parentsID: Number(action.PID)
             }
-            let _addListDate = {
-                ...state.data,
-                [action.id]: {
-                    ...state.data[action.id],
-                    sectionInfo: {
-                        ...state.data[action.id].sectionInfo,
-                        infoItem: [
-                            ...state.data[action.id].sectionInfo.infoItem.concat(_newItem)
-                        ]
-                    }
-                }
-            }
-            let addListresult = Object.keys(_addListDate).map(function(key) {
-                return _addListDate[key];
-            });
             return {
                 ...state,
-                data: addListresult
+                infoItem: state.infoItem.concat(editListItem)
             }
         case types.DEL_EDITLIST:
             let parentsID = action.id.split('.')[0]
             let listID = action.id.split('.')[1]
-            let ID;
             
-            state.data.forEach((item, id)=>{
-                if(parentsID == item.sectionId) {
-                    ID = id
-                }
-            });
-
-            let _newListDate = {
-                ...state.data,
-                [ID]: {
-                    ...state.data[ID],
-                    sectionInfo: {
-                        ...state.data[ID].sectionInfo,
-                        infoItem: [
-                            ...state.data[ID].sectionInfo.infoItem.filter((el) =>Number(listID) !== Number(el.sectionInfoId))
-                        ]
-                    }
-                }
-            }
-            let delListresult = Object.keys(_newListDate).map(function(key) {
-                return _newListDate[key];
-            });
+            let infoItemA = state.infoItem.filter((el)=>
+                Number(parentsID) === Number(el.parentsID) && Number(listID) !== Number(el.sectionInfoId)
+            );
+            let infoItemB = state.infoItem.filter((el)=>
+                Number(parentsID) !== Number(el.parentsID)
+            );
+           
             return {
                 ...state,
-                data: delListresult
+                infoItem: infoItemA.concat(infoItemB)
             }
         case types.ADD_REFERVIEW:
-            let ImgPId;
-            state.data.forEach((item, id)=>{
-                if(action.id == item.sectionId) {
-                    ImgPId = id
+            let viewPID;
+            state.Imgs.forEach((item, id)=>{
+                if(action.id == item.parentsID) {
+                    viewPID = id
                 }
             });
+           
             let _addIMGDate = {
-                ...state.data,
-                [ImgPId]: {
-                    ...state.data[ImgPId],
-                    sectionInfo: {
-                        ...state.data[ImgPId].sectionInfo,
-                        imgs: [
-                            ...state.data[ImgPId].sectionInfo.imgs.concat(action.src)
-                        ]
-                    }
+                ...state.Imgs,
+                [viewPID]:{
+                    ...state.Imgs[viewPID],
+                    imgSrc: state.Imgs[viewPID].imgSrc.concat(action.src)
                 }
             }
             let addIMGresult = Object.keys(_addIMGDate).map(function(key) {
                 return _addIMGDate[key];
             });
+
             return {
                 ...state,
-                data: addIMGresult
+                Imgs: addIMGresult
             }
         case types.DEL_REFERVIEW:
             let ImgparentsID = action.id.split('.')[0]
             let IMGID = action.id.split('.')[1]
-            let PID;
-            
-            state.data.forEach((item, id)=>{
-                if(ImgparentsID == item.sectionId) {
-                    PID = id
+            let IMGPID;
+
+            state.Imgs.forEach((item, id)=>{
+                if(ImgparentsID == item.parentsID) {
+                    IMGPID = id
                 }
             });
 
-            let _newListDate1 = {
-                ...state.data,
-                [PID]: {
-                    ...state.data[PID],
-                    sectionInfo: {
-                        ...state.data[PID].sectionInfo,
-                        imgs: [
-                            ...state.data[PID].sectionInfo.imgs.filter((el,i) =>Number(IMGID) !== Number(i))
-                        ]
-                    }
+            let _delIMGDate = {
+                ...state.Imgs,
+                [IMGPID]: {
+                    ...state.Imgs[IMGPID],
+                    imgSrc: state.Imgs[IMGPID].imgSrc.filter((el,i) =>Number(IMGID) !== Number(i))
                 }
             }
-            let delListresult1 = Object.keys(_newListDate1).map(function(key) {
-                return _newListDate1[key];
+
+            let delIMGresult = Object.keys(_delIMGDate).map(function(key) {
+                return _delIMGDate[key];
             });
+
             return {
                 ...state,
-                data: delListresult1
+                Imgs: delIMGresult
             }
         case types.CHANGE_TOOLS:
+            let ID
             let icontype = action.el+'icon toolicon'
+
+            state.sectionData.forEach((item, id)=>{
+                if(action.id == item.sectionId) {
+                    ID = id
+                }
+            });
+
             let _changeDate = {
-                ...state.data,
-                [action.id]: {
-                    ...state.data[action.id],
+                ...state.sectionData,
+                [ID]: {
+                    ...state.sectionData[ID],
                     editclassName: action.el == "edit"? "edit select": "edit",
                     sortclassName: action.el == "sort"? "sort select": "sort",
                     delclassName: action.el == "del"? "del select": "del",
@@ -176,80 +167,41 @@ const sections = (state = initialState, action) => {
                     draggable: action.el == "sort"? true : false
                 }
             }
-            let result2 = Object.keys(_changeDate).map(function(key) {
+            let changeDateresult = Object.keys(_changeDate).map(function(key) {
                 return _changeDate[key];
               });
             return {
                 ...state,
-                data: result2
+                sectionData: changeDateresult
             }
         case types.SORT_WORKSECTION:
             return {
                 ...state,
-                data: action.data
+                sectionData: action.data
             }
         case types.SORT_EDITLIST:
-            let SORTPID;
-            state.data.forEach((item, id)=>{
-                if(action.PID == item.sectionId) {
-                    SORTPID = id
-                }
-            });
-            let _sortListDate = {
-                ...state.data,
-                [SORTPID]: {
-                    ...state.data[SORTPID],
-                    sectionInfo: {
-                        ...state.data[SORTPID].sectionInfo,
-                        infoItem: action.data
-                    }
-                }
-            }
-            let sortListresult = Object.keys(_sortListDate).map(function(key) {
-                return _sortListDate[key];
-            });
+
+            let sortinfoItemB = state.infoItem.filter((el)=>
+                Number(action.PID) !== Number(el.parentsID)
+            );
+          
             return {
                 ...state,
-                data: sortListresult
+                infoItem: action.data.concat(sortinfoItemB)
             }
-        case types.UPDATE_DATA:
-            // let ImgPId;
-            // state.data.forEach((item, id)=>{
-            //     if(action.id == item.sectionId) {
-            //         ImgPId = id
-            //     }
-            // });
-            // let _addIMGDate = {
-            //     ...state.data,
-            //     [ImgPId]: {
-            //         ...state.data[ImgPId],
-            //         sectionInfo: {
-            //             ...state.data[ImgPId].sectionInfo,
-            //             imgs: [
-            //                 ...state.data[ImgPId].sectionInfo.imgs.concat(action.src)
-            //             ]
-            //         }
-            //     }
-            // }
-            // let addIMGresult = Object.keys(_addIMGDate).map(function(key) {
-            //     return _addIMGDate[key];
-            // });
-            return {
-                ...state,
-                data: state.data
-            }
+        // case types.UPDATE_DATA:
+        //     return {
+        //         ...state,
+        //         data: state.data
+        //     }
         case types.UPDATE_FILEINFO:
-            let updatePID,updateID,imageDicType
-            state.data.forEach((item, id)=>{
-                if(action.Pid == item.sectionId) {
-                    updatePID = id
-                }
-            });
-            state.data[updatePID].sectionInfo.infoItem.forEach((item, id)=>{
-                if(action.id == item.sectionInfoId) {
+            let updateID,imageDicType,statusType
+            state.infoItem.forEach((item, id)=>{
+                if(action.Pid == item.parentsID && action.id == item.sectionInfoId) {
                     updateID = id
                 }
             });
+
             let imageDic = {
                 "need_logo_":"logo",              
                 "need_bg_" : "bg",
@@ -280,48 +232,27 @@ const sections = (state = initialState, action) => {
                     imageDicType = imageDic[prop];
                 }
             }
-            console.log(imageDicType)
+            for (var prop in status) {
+                if(prop === action.filename.split(typeName)[0]){
+                    statusType = status[prop];
+                }
+            }
 
             let updateInfoDate = {
-                ...state.data,
-                [updatePID]: {
-                    ...state.data[updatePID],
-                    sectionInfo: {
-                        ...state.data[updatePID].sectionInfo,
-                        infoItem: {
-                            ...state.data[updatePID].sectionInfo.infoItem,
-                            [updateID]:{
-                                ...state.data[updatePID].sectionInfo.infoItem[updateID],
-                                type: imageDicType,
-                                fileName: typeName,
-                                explanation: "12345"
-                            }
-                        }
-                    }
+                ...state.infoItem,
+                [updateID]: {
+                    ...state.infoItem[updateID],
+                    type: imageDicType,
+                    fileName: typeName,
+                    explanation: statusType
                 }
             }
-            
-            let updateInfoDateItem = updateInfoDate[updatePID].sectionInfo.infoItem
-            let updateinfoItem = Object.keys(updateInfoDateItem).map(function(key) {
-                return updateInfoDateItem[key];
-            });
-            let updateInfoDate2 = {
-                ...state.data,
-                [updatePID]: {
-                    ...state.data[updatePID],
-                    sectionInfo: {
-                        ...state.data[updatePID].sectionInfo,
-                        infoItem: updateinfoItem
-                    }
-                }
-            }
-            let updateInforesult = Object.keys(updateInfoDate2).map(function(key) {
-                return updateInfoDate2[key];
-            });
-
+            let updateInforesult = Object.keys(updateInfoDate).map(function(key) {
+                return updateInfoDate[key];
+              });
             return {
                 ...state,
-                data: updateInforesult
+                infoItem: updateInforesult
             }
         default:
             return state;

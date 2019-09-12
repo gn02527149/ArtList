@@ -6,7 +6,7 @@ import TitleName from '../components/TitleName'
 import Typesetting from '../components/Typesetting'
 import ListContainer from '../components/ListContainer'
 import editSrc from '../assets/images/switch_edit_2.svg'
-import sortSrc from '../assets/images/switch_sort_2.svg'
+import sortSrc from '../assets/images/switch_sortRow_2.svg'
 import delSrc from '../assets/images/switch_deleteRow_2.svg'
 
 import '../assets/styles/Worksection.scss'
@@ -17,8 +17,8 @@ class Worksection extends Component {
     super(props)
   }
   _onAddList=(e)=>{
-    let id = e.target.id.split("appendrow_")[1]
-    this.props.addeditList(id)
+    let Pid = e.target.id.split("appendrow_")[1]
+    this.props.addeditList(Pid)
   }
   _onDelsection=(e)=>{
     let id = e.target.id.split("delsection_")[1]
@@ -76,35 +76,37 @@ class Worksection extends Component {
     this.props.updateFileInfo(Pid,id,filename)
   }
   genTitleName(info,index){
+    const { sections } = this.props;
     return (
       <div key={`Worksection_${info.sectionId}`} id={`Worksection_${info.sectionId}`}>
         <hr />
         <div className="Toolbar">
           <div className="tools">
-            <span id={`tool_edit_${index}`} onClick={this._changeTools} className={info.editclassName}><img src={editSrc} /></span>
-            <span id={`tool_sort_${index}`} onClick={this._changeTools} className={info.sortclassName}><img src={sortSrc} /></span>
-            <span id={`tool_del_${index}`} onClick={this._changeTools} className={info.delclassName}><img src={delSrc} /></span>
+            <span id={`tool_edit_${info.sectionId}`} onClick={this._changeTools} className={info.editclassName}><img src={editSrc} /></span>
+            <span id={`tool_sort_${info.sectionId}`} onClick={this._changeTools} className={info.sortclassName}><img src={sortSrc} /></span>
+            <span id={`tool_del_${info.sectionId}`} onClick={this._changeTools} className={info.delclassName}><img src={delSrc} /></span>
           </div>
-          <div  className="appendrow" id={`appendrow_${index}`} onClick={this._onAddList}>新增一列</div>
-          <div  className="sortpage" onClick={this._openModal}>排序畫面</div>
-          <div  className="delsection" id={`delsection_${info.sectionId}`} onClick={this._onDelsection}>刪除畫面</div>
+          <div className="appendrow" id={`appendrow_${info.sectionId}`} onClick={this._onAddList}>新增一列</div>
+          <label htmlFor={`viewBoxInput_${info.sectionId}`}><div className="appenpreview" id={`appenpreview_${info.sectionId}`}>新增參考畫面</div></label>
+          <div className="sortpage" onClick={this._openModal}>排序畫面</div>
+          <div className="delsection" id={`delsection_${info.sectionId}`} onClick={this._onDelsection}>刪除畫面</div>
         </div>
         <div className="Worksection">
           <div className="worktitle">
             <TitleName {...info} />
             <Typesetting {...info} />
           </div>
-          <ListContainer {...info} _runTool={this._runTool} _addreferView={this._addreferView} _getFile={this._getFile}/>
+          <ListContainer sections={sections} sectionId={info.sectionId} toolicon={info.toolicon} disabled={info.disabled} draggable={info.draggable} _runTool={this._runTool} _addreferView={this._addreferView} _getFile={this._getFile}/>
         </div>
       </div>
     )
   }
   render(){
     const { sections } = this.props;
-    // console.log(sections);
+    console.log(sections);
     return (
-      <div>
-          {sections.data.map((info,index) =>this.genTitleName(info,index))}
+      <div className="worksections">
+          {sections.sectionData.map((info,index) =>this.genTitleName(info,index))}
       </div>
     )
   }

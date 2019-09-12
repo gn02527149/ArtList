@@ -1,5 +1,13 @@
 import * as types from '../constants/ActionTypes';
 
+/* section: 讀取專案資料夾 */
+export const loadFilename = (filename) => {
+    return {
+        type: types.LOAD_FILENAME,
+        filename
+    };
+};
+
 /* section: 加入畫面 */
 export const addWorksection = (name) => {
     return {
@@ -17,10 +25,10 @@ export const delWorksection = (id) => {
 };
 
 /* section: 加入一列 */
-export const addeditList = (id) => {
+export const addeditList = (PID) => {
     return {
         type: types.ADD_EDITLIST,
-        id
+        PID
     };
 };
 
@@ -82,7 +90,7 @@ export const updateDate = (id) => {
     };
 };
 
-/* section: 帶入‘列’圖片資訊 */
+/* section: 代入‘列’圖片資訊 */
 export const updateFileInfo = (Pid,id,filename) => {
     return {
         type: types.UPDATE_FILEINFO,

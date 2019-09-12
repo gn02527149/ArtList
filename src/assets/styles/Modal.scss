@@ -83,37 +83,37 @@
     width: 180px;
     height: 40px;
     border-radius: 20px;
-    border: 4px solid #8cbf73;
-    background: linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    background: -moz-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    background: -webkit-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    background: -o-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
+    border: 4px solid rgb(155,211,127);
+    background: linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    background: -moz-linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    background: -webkit-linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    background: -o-linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
     text-align: center;
     line-height: 34px;
-    color: rgb(103,155,78);
+    color: rgb(175,239,143);
     font-size: 20px;
     letter-spacing: 2px;
     cursor: pointer;
 }
 .modal .content .buttons div:hover{
-    border: 4px solid #9bdd7c;
-    background: linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
-    background: -moz-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
-    background: -webkit-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
-    background: -o-linear-gradient(270deg, #7fbf5f 50%, #72ac56 50%);
-    color: rgb(176,240,144);
+    border: 4px solid rgb(140,191,115);
+    background: linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    background: -moz-linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    background: -webkit-linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    background: -o-linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    color: rgb(102,153,77);
 }
 .sortSectionModal{
     min-height: 300px;
 }
 .sortSectionModal .info{
-    max-height: 420px;
+    height: 420px !important;
     overflow: auto;
 }
 .sortSectionModal ul{
-    flex-direction: column;
     width: 100%;
     height: 100%;
+    display: initial;
 }
 .sortSectionModal ul li{
     border: 0;
@@ -122,6 +122,7 @@
     width: 100% !important;
     justify-content: space-around;
 }
+
 .sortSectionModal ul li span{
     width: 50%;
     justify-content: left;
@@ -130,15 +131,59 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 4px solid #8cbf73;
-    background: linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    background: -moz-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    background: -webkit-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    background: -o-linear-gradient(270deg, #bbff99 50%, #a8e589 50%);
-    color: rgb(103,155,78);
+    border: 4px solid rgb(155,211,127);
+    background: linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    background: -moz-linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    background: -webkit-linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    background: -o-linear-gradient(270deg,rgb(122,166,100) 50%,rgb(110,149,90) 50%);
+    color: rgb(175,239,143);
     
 }
 .sortSectionModal ul li .sort img{
     background: transparent;
+}
+.sortSectionModal ul li:hover, .sortSectionModal ul li:hover span{
+    background-color: rgb(196,237,177);
+    cursor: pointer;
+}
+.sortSectionModal ul li:hover .sort{
+    border: 4px solid rgb(140,191,115);
+    background: linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    background: -moz-linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    background: -webkit-linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+    background: -o-linear-gradient(270deg, rgb(187,255,153) 50%, rgb(168,229,137) 50%);
+}
+.sortSectionModal ul li:hover .sort img{
     filter: invert(90%) sepia(120%) saturate(338%) hue-rotate(70deg) brightness(60%) contrast(89%);
+}
+.delBtn{
+    position: absolute;
+    right: 0;
+    top: 4px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.delBtn:hover{
+    opacity: 1;
+}
+.initialModal .info{
+    margin: 30px 0;
+    flex-direction: column;
+}
+.initialModal .info span{
+   margin-bottom: 10px;
+}
+.openFile{
+    padding-left: 10px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    height: 30px;
+    min-width: 200px;
+    font-size: 20px;
+    border: 1px solid #000;
+    display: inline-block;
+    cursor: pointer;
+}
+.projectFile{
+    display: none;
 }

@@ -3,6 +3,7 @@
 // export const UPDATE_USER      = 'UPDATE_USER';
 // export const UPDATE_MESSAGE   = 'UPDATE_MESSAGE';
 /* Section: 畫面列表 */
+export const LOAD_FILENAME    = 'LOAD_FILENAME';
 export const ADD_WORKSECTION  = 'ADD_WORKSECTION';
 export const DEL_WORKSECTION  = 'DEL_WORKSECTION';
 export const ADD_EDITLIST     = 'ADD_EDITLIST';

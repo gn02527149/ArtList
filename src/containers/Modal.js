@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addWorksection,sortWorksection } from '../actions'
-import sortSrc from '../assets/images/switch_sort_2.svg'
+import { addWorksection,sortWorksection,loadFilename } from '../actions'
+import sortSrc from '../assets/images/switch_sortRow_2.svg'
+import delBtn from '../assets/images/btn_closeB_1.svg'
 
 import '../assets/styles/Modal.scss'
 
@@ -46,7 +47,7 @@ class Modal extends Component {
       e.currentTarget.classList.remove("drag-down");
       this.over.classList.remove("drag-down");
       
-      var Data = sections.data;
+      var Data = sections.sectionData;
       var from = Number(this.dragged.dataset.id);
       var to = Number(this.over.dataset.id);
       Data.splice(to, 0, Data.splice(from, 1)[0]);
@@ -82,6 +83,10 @@ class Modal extends Component {
       }
       
   }
+  _selectFile=(e)=>{
+    let fileName = e.target.files[0].name
+    this.props.loadFilename(fileName)
+  }
   genTitleName=(info,index)=>{
     return (
       <li key={`titleName${info.sectionId}`} id={`titleName${info.sectionId}`}
@@ -99,10 +104,29 @@ class Modal extends Component {
   }
   render(){
     const { sections } = this.props;
+  
     return (
-        <div className="modals">
+        <div className="modals ModalBlock">
+          <div className="modal initialModal ModalBlock">
+              <div className="title">開啟專案</div>
+              <div className="delBtn" onClick={this._closeModal}><img src={delBtn} /></div>
+              <div className="content">
+                  <div className="info">
+                    <span>請選擇開案方式</span>
+                    <span>
+                      <input type="file" className="projectFile" id="projectFile" defaultValue="" ref="inputNewName" onChange={this._selectFile}></input>
+                      <label htmlFor="projectFile" className="openFile">{sections.fileName}</label>
+                    </span>
+                  </div>
+                  <div className="buttons">
+                      <div className="newProject">新增專案</div>
+                      <div className="loadProject">讀取舊專案</div>
+                  </div>
+              </div>
+          </div>
           <div className="modal addSectionModal">
               <div className="title">新增畫面</div>
+              <div className="delBtn" onClick={this._closeModal}><img src={delBtn} /></div>
               <div className="content">
                   <div className="info">
                     <span>畫面名稱</span>
@@ -119,11 +143,10 @@ class Modal extends Component {
               <div className="content">
                   <div className="info">
                     <ul onDragOver={this.dragOver.bind(this)}>
-                      {sections.data.map((info,index) =>this.genTitleName(info,index))}
+                      {sections.sectionData.map((info,index) =>this.genTitleName(info,index))}
                     </ul>
                   </div>
                   <div className="buttons">
-                      {/* <div className="closeBtn" onClick={this._closeModal}>取消</div> */}
                       <div className="addBtn" onClick={this._closeModal}>確定</div>
                   </div>
               </div>
@@ -139,7 +162,8 @@ export default connect(
   }),
   dispatch => bindActionCreators({
     addWorksection,
-    sortWorksection
+    sortWorksection,
+    loadFilename
   }, dispatch)
 )(Modal);
 

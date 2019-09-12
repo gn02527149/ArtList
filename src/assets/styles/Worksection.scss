@@ -53,15 +53,9 @@
 .tools span.select img,.tools span:hover img{ 
     filter: invert(90%) sepia(120%) saturate(338%) hue-rotate(70deg) brightness(60%) contrast(89%);
 }
-.appendrow,.delsection,.sortpage{
+.appendrow,.delsection,.sortpage,.appenpreview{
     width: 180px;
     height: 46px;
-    border: 4px solid rgba(126,172,103,1);
-    color: rgb(102,153,77);
-    background: linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
-    background: -moz-linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
-    background: -webkit-linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
-    background: -o-linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
     text-align: center;
     line-height: 40px;
     font-size: 22px;
@@ -69,8 +63,6 @@
     font-weight: 500;
     cursor: pointer;
     letter-spacing: 2px;
-}
-.appendrow:hover,.delsection:hover,.sortpage:hover{
     color: rgb(187,255,153);
     background: linear-gradient(270deg, rgba(127,191,95, 1)50%, rgba(114, 172, 86, 1)50%); 
     background: -moz-linear-gradient(270deg, rgba(127,191,95, 1)50%, rgba(114, 172, 86, 1)50%); 
@@ -78,4 +70,11 @@
     background: -o-linear-gradient(270deg, rgba(127,191,95, 1)50%, rgba(114, 172, 86, 1)50%); 
     border: 4px solid rgba(155,221,124,1);
 }
-
+.appendrow:hover,.delsection:hover,.sortpage:hover,.appenpreview:hover{
+    border: 4px solid rgba(126,172,103,1);
+    color: rgb(102,153,77);
+    background: linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
+    background: -moz-linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
+    background: -webkit-linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
+    background: -o-linear-gradient(270deg, rgba(187, 255, 153, 1)50%, rgba(168, 229, 137, 1)50%); 
+}

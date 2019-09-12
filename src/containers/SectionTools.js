@@ -5,7 +5,7 @@ import { addWorksection } from '../actions'
 
 import '../assets/styles/Worksection.scss'
 
-class Appendview extends Component {
+class SectionTools extends Component {
   constructor(props){
     super(props)
   }
@@ -17,10 +17,14 @@ class Appendview extends Component {
   }
   render(){
     return (
-        <div className="appendview">
+        <div className="sectionTools">
             <hr />
             <div className="appendSection" onClick={this._openModal}>新增畫面</div>
             <hr />
+            <div className="ToolsBtns">
+              <div className="saveSection" onClick={this._openModal}>存擋</div>
+              <div className="previewSection" onClick={this._openModal}>預覽</div>
+            </div>
         </div>
     )
   }
@@ -33,4 +37,4 @@ export default connect(
   dispatch => bindActionCreators({
     addWorksection
   }, dispatch)
-)(Appendview);
+)(SectionTools);

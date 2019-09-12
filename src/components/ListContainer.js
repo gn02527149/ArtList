@@ -7,7 +7,7 @@ class ListContainer extends Component {
         super(props)
     }
     render(){
-        const { sectionInfo,sectionId,toolicon,disabled,_runTool,_addreferView,_getFile,draggable} = this.props;
+        const { sections,sectionId,toolicon,disabled,_runTool,_addreferView,_getFile,draggable} = this.props;
         return (
             <div className="ItemList">
                 <div className="title">
@@ -21,7 +21,7 @@ class ListContainer extends Component {
                     </ul>
                 </div>
                 <div className="ListItem">
-                    <ListItem {...sectionInfo} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool} _addreferView={_addreferView} _getFile={_getFile} draggable={draggable} />
+                    <ListItem sections={sections} sectionId={sectionId} toolicon={toolicon} disabled={disabled} _runTool={_runTool} _addreferView={_addreferView} _getFile={_getFile} draggable={draggable} />
                 </div>
             </div>
         )
