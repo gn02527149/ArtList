@@ -102,7 +102,7 @@
     "redux-thunk": "^2.2.0",
     "classnames": "^2.2.3",
     "history": "^1.17.0",
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "react-addons-test-utils": "0.14.4",
     "redux-simple-router": "^2.0.4"
   }
